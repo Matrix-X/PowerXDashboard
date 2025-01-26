@@ -41,7 +41,7 @@
             allow-clear
           >
             <a-option
-              v-for="(item, index) in employeesList.list"
+              v-for="(item, index) in usersList.list"
               :key="index"
               :value="item.weWorkUserId"
               >{{ item.name }}</a-option
@@ -214,7 +214,7 @@
       :hide-cancel="true"
     >
       <edit-qr
-        :employees-list="employeesList.list"
+        :users-list="usersList.list"
         :edit-data="state.recordObj"
         @submit-success="handleSendSuccess"
       ></edit-qr>
@@ -241,7 +241,6 @@
 
 <script lang="ts" setup>
   import { onMounted, reactive, ref, toRaw } from 'vue';
-  import { listEmployees } from '@/api/scrm/employee';
   import { Message } from '@arco-design/web-vue';
   import {
     getQrcodeList,
@@ -250,6 +249,7 @@
     enableQrcode,
     disableQrcode,
   } from '@/api/scrm/enterprise-qr';
+  import { listUsers } from '@/api/scrm/user';
 
   const qrcodeUrl = import.meta.env.VITE_BASE_QRCODE_URL;
   const state = reactive({
@@ -272,7 +272,7 @@
     expiryState: '',
     pageSize: 10,
   } as GetQrcodeRequest);
-  const employeesList = reactive<any>({
+  const usersList = reactive<any>({
     list: [],
   });
   const pagination = reactive({
@@ -423,12 +423,12 @@
     pagination.pageSize = pageSize;
     fetchQrcodeList();
   };
-  async function fetchtEmployees() {
-    const res = await listEmployees({});
+  async function fetchtUsers() {
+    const res = await listUsers({});
     try {
-      employeesList.list = res.data?.list;
+      usersList.list = res.data?.list;
     } catch (err) {
-      employeesList.list = [];
+      usersList.list = [];
     }
   }
   function getTime(timestamp: number): string {
@@ -443,7 +443,7 @@
   }
   onMounted(() => {
     fetchQrcodeList();
-    fetchtEmployees();
+    fetchtUsers();
   });
 </script>
 

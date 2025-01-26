@@ -23,7 +23,7 @@
           multiple
         >
           <a-option
-            v-for="(item, index) in employeesList?.list"
+            v-for="(item, index) in usersList?.list"
             :key="index"
             :value="item.weWorkUserId"
             :label="item.name"
@@ -79,12 +79,12 @@
     UploadRequest,
   } from '@arco-design/web-vue';
   import uploadMediaImages from '@/utils/media-resource';
-  import { listEmployees } from '@/api/scrm/employee';
   import {
     wechatMessageArticles,
     GetMessageArticlesRequest,
     Articles,
   } from '@/api/scrm/customer';
+  import { listUsers } from '@/api/scrm/user';
 
   const prop = defineProps({
     agentid: {
@@ -96,7 +96,7 @@
 
   const apiUrl = import.meta.env.VITE_API_API_URL;
 
-  const employeesList = reactive<any>({
+  const usersList = reactive<any>({
     list: [],
   });
   const formRef = ref();
@@ -191,15 +191,15 @@
       formModelData.agentid = prop.agentid;
     },
   );
-  async function fetchtEmployees() {
-    const res = await listEmployees({});
+  async function fetchtUsers() {
+    const res = await listUsers({});
     try {
-      employeesList.list = res.data?.list;
+      usersList.list = res.data?.list;
     } catch (err) {
-      employeesList.list = [];
+      usersList.list = [];
     }
   }
   onMounted(() => {
-    fetchtEmployees();
+    fetchtUsers();
   });
 </script>

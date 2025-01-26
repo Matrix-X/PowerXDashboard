@@ -4,7 +4,6 @@ import globalComponents from '@/components';
 import WujieVue from 'wujie-vue3';
 import { loadPluginRoutes } from '@/router/routes';
 import WeyUI from '@yaoyaochi/weyui';
-// import '@yaoyaochi/weyui/lib/style.css';
 import router from './router';
 import store from './store';
 import i18n from './locale';

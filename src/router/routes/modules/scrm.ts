@@ -135,14 +135,12 @@ const Scrm: AppRouteRecordRaw = {
           },
         },
         {
-          path: '/scrm/operation/employee-group-send-history',
-          name: 'WeWorkEmployeeGroupSendHistory',
+          path: '/scrm/operation/user-group-send-history',
+          name: 'WeWorkUserGroupSendHistory',
           component: () =>
-            import(
-              '@/views/scrm/operation/employee-group-send-history/index.vue'
-            ),
+            import('@/views/scrm/operation/user-group-send-history/index.vue'),
           meta: {
-            locale: 'menu.scrm.operation.employeeGroupSendHistory',
+            locale: 'menu.scrm.operation.userGroupSendHistory',
             requiresAuth: true,
             roles: ['*'],
             hideChildrenInMenu: true,
@@ -287,7 +285,9 @@ const Scrm: AppRouteRecordRaw = {
         {
           path: '/scrm/wechat/organization',
           name: 'WeWorkWechatOrganization',
-          component: () => import('@/views/scrm/wechat/organization/index.vue'),
+          // component: () => import('@/views/scrm/wechat/organization/index.vue'),
+          component: () =>
+            import('@/views/scrm/wechat/organization/index_.vue'),
           meta: {
             locale: 'menu.scrm.wechat.organization',
             requiresAuth: true,
@@ -295,11 +295,11 @@ const Scrm: AppRouteRecordRaw = {
           },
         },
         {
-          path: '/scrm/wechat/employee',
-          name: 'WeWorkWechatEmployee',
-          component: () => import('@/views/scrm/wechat/employee/index.vue'),
+          path: '/scrm/wechat/user',
+          name: 'WeWorkWechatUser',
+          component: () => import('@/views/scrm/wechat/user/index.vue'),
           meta: {
-            locale: 'menu.scrm.wechat.employees',
+            locale: 'menu.scrm.wechat.users',
             requiresAuth: true,
             roles: ['*'],
           },

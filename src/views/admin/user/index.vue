@@ -2,7 +2,7 @@
   <div class="container">
     <a-card>
       <a-space>
-        <a-button type="primary" @click="state.createEmployeeVisible = true"
+        <a-button type="primary" @click="state.createUserVisible = true"
           >新增员工</a-button
         >
       </a-space>
@@ -24,8 +24,8 @@
           </a-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="12" :lg="16">
-          <SearchEmployeeTable
-            ref="searchEmployeeTableRef"
+          <SearchUserTable
+            ref="searchUserTableRef"
             v-model:dep-ids="searchDepIds"
           />
         </a-col>
@@ -33,27 +33,27 @@
     </a-card>
 
     <a-drawer
-      v-model:visible="state.createEmployeeVisible"
+      v-model:visible="state.createUserVisible"
       title="新增员工"
       width="500px"
       :footer="false"
     >
-      <CreateEmployee ref="createEmployeeRef" @submit-success="closeCreate" />
+      <CreateUser ref="createUserRef" @submit-success="closeCreate" />
     </a-drawer>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import CreateEmployee from '@/views/admin/employee/components/create-employee.vue';
   import { computed, reactive, ref } from 'vue';
-  import SearchEmployeeTable from '@/views/admin/employee/components/search-employee-table.vue';
-  import DepartmentSide from '@/views/admin/employee/components/department-side.vue';
+  import CreateUser from '@/views/admin/user/components/create-user.vue';
+  import SearchUserTable from '@/views/admin/user/components/search-user-table.vue';
+  import DepartmentSide from '@/views/admin/user/components/department-side.vue';
 
-  const createEmployeeRef = ref();
-  const searchEmployeeTableRef = ref();
+  const createUserRef = ref();
+  const searchUserTableRef = ref();
 
   const state = reactive({
-    createEmployeeVisible: false,
+    createUserVisible: false,
     depId: 0,
   });
 
@@ -62,14 +62,14 @@
   });
 
   const closeCreate = () => {
-    state.createEmployeeVisible = false;
-    searchEmployeeTableRef.value.refresh();
+    state.createUserVisible = false;
+    searchUserTableRef.value.refresh();
   };
 </script>
 
 <script lang="ts">
   export default {
-    name: 'EmployeeList',
+    name: 'UserList',
   };
 </script>
 

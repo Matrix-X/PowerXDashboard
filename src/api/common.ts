@@ -8,7 +8,7 @@ import { Pagination } from '@/types/global';
  * @version v1
  */
 
-export interface EmployeeOption {
+export interface UserOption {
   id: number;
   avatar: string;
   account: string;
@@ -17,43 +17,40 @@ export interface EmployeeOption {
   phoneNumber: string;
 }
 
-export interface GetEmployeeOptionsRequest extends Pagination {
+export interface GetUserOptionsRequest extends Pagination {
   likeName?: string;
   likeEmail?: string;
   likePhoneNumber?: string;
 }
 
-export interface GetEmployeeOptionsReply extends Pagination {
-  list: EmployeeOption[];
+export interface GetUserOptionsReply extends Pagination {
+  list: UserOption[];
 }
 
-export function getEmployeeOptions(request: GetEmployeeOptionsRequest) {
-  return axios.get<GetEmployeeOptionsReply>(
-    '/api/v1/admin/common/options/employees',
-    {
-      params: request,
-    },
-  );
+export function getUserOptions(request: GetUserOptionsRequest) {
+  return axios.get<GetUserOptionsReply>('/api/v1/admin/common/options/users', {
+    params: request,
+  });
 }
 
-export interface EmployeeQueryRoleOption {
+export interface UserQueryRoleOption {
   roleCode: string;
   roleName: string;
 }
 
-export interface EmployeeQueryDepartmentOption {
+export interface UserQueryDepartmentOption {
   departmentId: number;
   departmentName: string;
 }
 
-export interface GetEmployeeQueryOptionsReply {
-  roles: EmployeeQueryRoleOption[];
-  departments: EmployeeQueryDepartmentOption[];
+export interface GetUserQueryOptionsReply {
+  roles: UserQueryRoleOption[];
+  departments: UserQueryDepartmentOption[];
 }
 
-export function getEmployeeQueryOptions() {
-  return axios.get<GetEmployeeQueryOptionsReply>(
-    '/api/v1/admin/common/options/employee-query',
+export function getUserQueryOptions() {
+  return axios.get<GetUserQueryOptionsReply>(
+    '/api/v1/admin/common/options/user-query',
   );
 }
 

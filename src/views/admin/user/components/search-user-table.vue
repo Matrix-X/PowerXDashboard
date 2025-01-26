@@ -57,7 +57,7 @@
       <template #columns>
         <a-table-column title="姓名" :width="100">
           <template #cell="{ record }">
-            <a-link @click="gotoEmployeeDetail(record.id)"
+            <a-link @click="gotoUserDetail(record.id)"
               >{{ record.name }}
             </a-link>
           </template>
@@ -76,7 +76,7 @@
               :model-value="record.isEnabled"
               @change="
                 (v) => {
-                  changeEmployeeStatus(record.id, v);
+                  changeUserStatus(record.id, v);
                 }
               "
             />
@@ -92,7 +92,7 @@
           <template #cell="{ record }">
             <a-space>
               <!-- 编辑员工按钮 -->
-              <a-button @click="openEditEmployeeModal(record.id)">
+              <a-button @click="openEditUserModal(record.id)">
                 <template #icon>
                   <icon-edit :style="{ fontSize: '16px', color: 'green' }" />
                 </template>
@@ -106,8 +106,8 @@
               <!-- 删除员工按钮 -->
               <a-popconfirm
                 content="确定要删除用户吗?"
-                :ok-loading="state.deleteEmployeeLoading"
-                @ok="deleteEmployeeById(record.id)"
+                :ok-loading="state.deleteUserLoading"
+                @ok="deleteUserById(record.id)"
               >
                 <a-button>
                   <template #icon>
@@ -118,15 +118,14 @@
             </a-space>
             <a-drawer
               v-if="
-                state.editEmployee.visible &&
-                state.editEmployee.employeeId === record.id
+                state.editUser.visible && state.editUser.userId === record.id
               "
-              v-model:visible="state.editEmployee.visible"
+              v-model:visible="state.editUser.visible"
               title="编辑员工"
               width="500px"
             >
-              <EditEmployee
-                :id="state.editEmployee.employeeId"
+              <EditUser
+                :id="state.editUser.userId"
                 @submit-success="queryChange()"
               />
             </a-drawer>
@@ -139,17 +138,17 @@
 
 <script lang="ts" setup>
   import { computed, onMounted, reactive, ref, watch } from 'vue';
-  import {
-    deleteEmployee,
-    listEmployees,
-    ListEmployeesReply,
-    ListEmployeesRequest,
-    updateEmployee,
-  } from '@/api/employee';
   import { useI18n } from 'vue-i18n';
   import { useRouter } from 'vue-router';
-  import EditEmployee from '@/views/admin/employee/components/edit-employee.vue';
-  import { getEmployeeQueryOptions, getOptions } from '@/api/common';
+  import { getUserQueryOptions, getOptions } from '@/api/common';
+  import EditUser from '@/views/admin/user/components/edit-user.vue';
+  import {
+    deleteUser,
+    listUsers,
+    ListUsersReply,
+    ListUsersRequest,
+    updateUser,
+  } from '@/api/user';
 
   const { t } = useI18n();
   const router = useRouter();
@@ -182,22 +181,22 @@
     roleCodes: [] as string[],
     isEnable: undefined as undefined | boolean,
     depIds: [],
-  } as ListEmployeesRequest);
+  } as ListUsersRequest);
 
   const state = reactive({
     tableLoading: false,
-    deleteEmployeeLoading: false,
-    editEmployee: {
+    deleteUserLoading: false,
+    editUser: {
       visible: false,
       loading: false,
-      employeeId: 0,
+      userId: 0,
     },
   });
 
-  const pageData = ref({} as ListEmployeesReply);
+  const pageData = ref({} as ListUsersReply);
 
   function fetchOption() {
-    getEmployeeQueryOptions().then((res) => {
+    getUserQueryOptions().then((res) => {
       option.value.roles = res.data.roles;
       option.value.departments = res.data.departments;
     });
@@ -211,7 +210,7 @@
       return;
     }
     state.tableLoading = true;
-    listEmployees(queryForm)
+    listUsers(queryForm)
       .then((res) => {
         pageData.value = res.data;
       })
@@ -224,24 +223,24 @@
 
   function getGenderLabel(gender: string): string {
     if (gender === 'male') {
-      return t('employee.genderUnKnown');
+      return t('user.genderUnKnown');
     }
     if (gender === 'female') {
-      return t('employee.genderMale');
+      return t('user.genderMale');
     }
     if (gender === 'un_know') {
-      return t('employee.genderFemale');
+      return t('user.genderFemale');
     }
     return '';
   }
 
-  function gotoEmployeeDetail(id: number) {
-    router.push(`/admin/employee/detail/${id}`);
+  function gotoUserDetail(id: number) {
+    router.push(`/admin/user/detail/${id}`);
   }
 
-  function changeEmployeeStatus(id: number, value: any) {
+  function changeUserStatus(id: number, value: any) {
     const status = value ? 'enabled' : 'disabled';
-    updateEmployee({ id, status })
+    updateUser({ id, status })
       .then((res) => {
         pageData.value.list.forEach((item) => {
           if (item.id === id) {
@@ -254,23 +253,23 @@
       });
   }
 
-  const deleteEmployeeById = (id: number) => {
-    if (state.deleteEmployeeLoading) {
+  const deleteUserById = (id: number) => {
+    if (state.deleteUserLoading) {
       return;
     }
-    state.deleteEmployeeLoading = true;
-    deleteEmployee({ id })
+    state.deleteUserLoading = true;
+    deleteUser({ id })
       .then((res) => {
         queryChange();
       })
       .finally(() => {
-        state.deleteEmployeeLoading = false;
+        state.deleteUserLoading = false;
       });
   };
 
-  function openEditEmployeeModal(id: number) {
-    state.editEmployee.employeeId = id;
-    state.editEmployee.visible = true;
+  function openEditUserModal(id: number) {
+    state.editUser.userId = id;
+    state.editUser.visible = true;
   }
 
   watch(depIds, () => {

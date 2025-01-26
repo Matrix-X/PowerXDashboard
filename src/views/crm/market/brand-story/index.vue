@@ -2,10 +2,8 @@
   <div class="container"> </div>
 </template>
 
-<script lang="ts">
-  export default {
-    name: '路由Name',
-  };
+<script lang="ts" setup>
+  import { onMounted, ref } from 'vue';
 </script>
 
-<style scoped></style>
+<style scoped lang="less"></style>

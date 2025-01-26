@@ -9,7 +9,7 @@ const UriStore = '/stores';
 
 export interface Store extends PowerModel, MediaSet {
   name: string;
-  employeeId?: number;
+  userId?: number;
   contactNumber: string;
   address: string;
   description: string;

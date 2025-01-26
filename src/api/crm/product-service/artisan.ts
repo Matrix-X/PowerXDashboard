@@ -8,7 +8,7 @@ import { MediaSet } from '@/api/media-resource';
 const UriArtisan = '/artisans';
 
 export interface Artisan extends PowerModel, MediaSet {
-  employeeId?: number;
+  userId?: number;
   name: string;
   level?: number;
   gender: boolean;

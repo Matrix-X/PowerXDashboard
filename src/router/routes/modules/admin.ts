@@ -12,36 +12,36 @@ const Admin: AppRouteRecordRaw = {
     icon: 'icon-tool',
   },
   children: [
-    // employee
+    // user
     {
-      path: '/admin/employee',
-      name: 'Employee',
+      path: '/admin/user',
+      name: 'User',
       component: EMPTY_LAYOUT,
-      redirect: '/admin/employee/list',
+      redirect: '/admin/user/list',
       meta: {
         icon: 'icon-user',
-        locale: 'menu.admin.employee',
+        locale: 'menu.admin.user',
         requiresAuth: true,
         roles: ['*'],
         hideChildrenInMenu: true,
       },
       children: [
         {
-          path: '/admin/employee/list',
-          name: 'EmployeeList',
-          component: () => import('@/views/admin/employee/index.vue'),
+          path: '/admin/user/list',
+          name: 'UserList',
+          component: () => import('@/views/admin/user/index.vue'),
           meta: {
-            locale: 'menu.admin.employee',
+            locale: 'menu.admin.user',
             requiresAuth: true,
             roles: ['*'],
           },
         },
         {
-          path: '/admin/employee/detail/:id',
-          name: 'EmployeeDetail',
-          component: () => import('@/views/admin/employee/detail/index.vue'),
+          path: '/admin/user/detail/:id',
+          name: 'UserDetail',
+          component: () => import('@/views/admin/user/detail/index.vue'),
           meta: {
-            locale: 'menu.admin.employee.detail',
+            locale: 'menu.admin.user.detail',
             requiresAuth: true,
             roles: ['*'],
           },
@@ -62,7 +62,7 @@ const Admin: AppRouteRecordRaw = {
       children: [
         {
           path: '/admin/organization/department',
-          name: 'OrganizationEmployee',
+          name: 'OrganizationUser',
           component: EMPTY_LAYOUT,
           redirect: '/admin/organization/department/list',
           meta: {

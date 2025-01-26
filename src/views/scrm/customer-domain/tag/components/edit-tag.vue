@@ -61,7 +61,7 @@
   import { editTag, EditTagRequest } from '@/api/scrm/tag';
 
   const prop = defineProps({
-    employeesList: {
+    usersList: {
       type: Array as PropType<any>,
       default: () => {
         return [];

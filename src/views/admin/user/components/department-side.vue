@@ -50,7 +50,7 @@
 <script lang="ts" setup>
   import { computed, onMounted, PropType, reactive } from 'vue';
   import { DepartmentNode, getDepartmentTree } from '@/api/department';
-  import CreateDepartment from '@/views/admin/employee/components/create-department.vue';
+  import CreateDepartment from '@/views/admin/user/components/create-department.vue';
 
   const prop = defineProps({
     modelValue: {

@@ -54,11 +54,11 @@
         </div>
       </a-space>
       <a-drawer
-        v-model:visible="state.updateEmployeeVisible"
+        v-model:visible="state.updateUserVisible"
         width="500px"
         :footer="false"
       >
-        <EditEmployee v-if="data.id !== undefined" :id="data.id" />
+        <EditUser v-if="data.id !== undefined" :id="data.id" />
       </a-drawer>
     </a-card>
   </div>
@@ -66,36 +66,36 @@
 
 <script lang="ts" setup>
   import { onMounted, reactive, ref } from 'vue';
-  import {
-    deleteEmployee,
-    Employee,
-    getEmployee,
-    resetPassword,
-    updateEmployee,
-  } from '@/api/employee';
   import { useRoute, useRouter } from 'vue-router';
   import { Message } from '@arco-design/web-vue';
-  import EditEmployee from '@/views/admin/employee/components/edit-employee.vue';
+  import {
+    deleteUser,
+    User,
+    getUser,
+    resetPassword,
+    updateUser,
+  } from '@/api/user';
+  import EditUser from '@/views/admin/user/components/edit-user.vue';
 
   const route = useRoute();
   const router = useRouter();
 
   const userId = parseInt(route.params.id as string, 10);
 
-  const data = ref({} as Employee);
+  const data = ref({} as User);
 
   const state = reactive({
-    updateEmployeeVisible: false,
+    updateUserVisible: false,
   });
 
   const editOnClick = () => {
-    state.updateEmployeeVisible = true;
+    state.updateUserVisible = true;
   };
 
   const deleteOnClick = () => {
-    deleteEmployee({ id: data.value.id }).then((res) => {
+    deleteUser({ id: data.value.id }).then((res) => {
       Message.success('删除成功');
-      router.push('/admin/employee/list');
+      router.push('/admin/user/list');
     });
   };
 
@@ -107,7 +107,7 @@
 
   const enableChange = (value: any) => {
     if (value !== data.value.isEnabled) {
-      updateEmployee({
+      updateUser({
         id: data.value.id,
         status: value ? 'enabled' : 'disabled',
       }).then((res) => {
@@ -117,7 +117,7 @@
   };
 
   function fetchData() {
-    getEmployee({ id: userId }).then((res) => {
+    getUser({ id: userId }).then((res) => {
       data.value = res.data;
     });
   }
@@ -129,7 +129,7 @@
 
 <script lang="ts">
   export default {
-    name: 'EmployeeDetail',
+    name: 'UserDetail',
   };
 </script>
 

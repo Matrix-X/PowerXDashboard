@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { encodePassword } from '@/utils/security';
 
 export interface LoginRequest {
   userName?: string;
@@ -22,10 +23,14 @@ export interface ExchangeReply {
   refreshToken: string;
 }
 
-export function login(request: LoginRequest) {
+export async function login(request: LoginRequest) {
+  const requestLogin = {
+    ...request,
+    password: await encodePassword(request.password),
+  };
   return axios.post<LoginReply>(
     '/api/v1/admin/auth/access/actions/basic-login',
-    request,
+    requestLogin,
   );
 }
 

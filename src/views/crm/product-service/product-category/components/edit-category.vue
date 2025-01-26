@@ -60,7 +60,7 @@
     ProductCategory,
     updateCategory,
   } from '@/api/crm/product-service/category';
-  import { getEmployeeOptions, ParentOption } from '@/api/common';
+  import { getUserOptions, ParentOption } from '@/api/common';
   import uploadMediaImages from '@/utils/media-resource';
 
   const prop = defineProps({
@@ -121,7 +121,7 @@
   });
 
   // function fetchLeaderOptions(likeName = '') {
-  //   return getEmployeeOptions({ likeName }).then((res) => {
+  //   return getUserOptions({ likeName }).then((res) => {
   //     // options.leaderOptions = res.data.list;
   //   });
   // }

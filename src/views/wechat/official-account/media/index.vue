@@ -103,7 +103,9 @@
 
   const onUploadSuccess = async () => {
     // console.log('onUploadSuccess', dataType.value);
-    await refreshMediaList(dataType.value);
+    setInterval(() => {
+      refreshMediaList(dataType.value);
+    }, 2000);
   };
 
   const deleteImg = (item: any) => {

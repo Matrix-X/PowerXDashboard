@@ -1,16 +1,10 @@
 import { defineStore } from 'pinia';
 import { Notification } from '@arco-design/web-vue';
-import type { NotificationReturn } from '@arco-design/web-vue/es/notification/interface';
+
 import type { RouteRecordNormalized } from 'vue-router';
 import defaultSettings from '@/config/settings.json';
 import { getMenuList } from '@/api/userinfo';
 import { AppState } from './types';
-
-const sessionPrefix = 'app';
-
-function formatSessionKey(key: string) {
-  return `${sessionPrefix}:${key}`;
-}
 
 const useAppStore = defineStore('app', {
   state: (): AppState => ({ ...defaultSettings }),
@@ -54,22 +48,21 @@ const useAppStore = defineStore('app', {
     },
     // 获取服务器菜单配置
     async fetchServerMenuConfig() {
-      let notifyInstance: NotificationReturn | null = null;
       try {
-        notifyInstance = Notification.info({
+        Notification.info({
           id: 'menuNotice',
           content: '加载中',
           closable: true,
         });
         const { data } = await getMenuList();
         this.serverMenu = data;
-        notifyInstance = Notification.success({
+        Notification.success({
           id: 'menuNotice',
           content: '成功',
           closable: true,
         });
       } catch (error) {
-        notifyInstance = Notification.error({
+        Notification.error({
           id: 'menuNotice',
           content: '错误',
           closable: true,

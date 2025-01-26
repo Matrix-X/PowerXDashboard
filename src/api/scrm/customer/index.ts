@@ -12,7 +12,7 @@ import axios from 'axios';
  * @description scrm客户管理
  */
 
-export interface EmployeeDepartment {
+export interface UserDepartment {
   depId: number;
   depName: string;
 }

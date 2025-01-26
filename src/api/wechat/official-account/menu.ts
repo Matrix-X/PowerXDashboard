@@ -22,7 +22,7 @@ export interface SyncOAMenuReply {
 }
 
 export function syncOAMenu(request: SyncOAMenuRequest) {
-  return axios.put<SyncOAMenuReply>(
+  return axios.post<SyncOAMenuReply>(
     `${PrefixUriAdmin + UriOAMenu}/sync`,
     request,
   );

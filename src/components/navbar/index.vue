@@ -7,7 +7,7 @@
           :style="{ margin: 0, fontSize: '18px' }"
           :heading="5"
         >
-          PowerX Dashboard
+          PowerX Dashboard - {{ PowerXVersion }}
         </a-typography-title>
         <icon-menu-fold
           v-if="!topMenu && appStore.device === 'mobile'"

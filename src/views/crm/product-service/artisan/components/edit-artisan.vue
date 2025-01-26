@@ -132,7 +132,7 @@
   const formRef = ref();
   const formModel = ref({
     id: prop.node?.id,
-    employeeId: prop.node.employeeId,
+    userId: prop.node.userId,
     name: prop.node.name,
     level: prop.node.level,
     gender: prop.node.gender,

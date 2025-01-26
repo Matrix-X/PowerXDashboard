@@ -70,7 +70,7 @@ const Home: AppRouteRecordRaw = {
       // 子级Route组件会被嵌入到PageLayout, 即内容区域
       component: () => import('@/views/home/index.vue'),
       meta: {
-        locale: 'menu.admin.employee',
+        locale: 'menu.admin.user',
         // 登录态
         requiresAuth: true,
         // 路由所需角色, ['*']允许所有角色

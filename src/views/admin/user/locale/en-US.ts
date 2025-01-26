@@ -1,5 +1,5 @@
 export default {
-  employee: {
+  user: {
     gender: 'Gender',
     genderMale: 'Male',
     genderFemale: 'Female',

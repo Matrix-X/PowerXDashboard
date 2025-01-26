@@ -39,7 +39,7 @@
           allow-clear
         >
           <a-option
-            v-for="(item, index) in prop.employeesList"
+            v-for="(item, index) in prop.usersList"
             :key="index"
             :value="item.weWorkUserId"
             >{{ item.name }}</a-option
@@ -85,7 +85,7 @@
   } from '@/api/scrm/enterprise-qr';
 
   const prop = defineProps({
-    employeesList: {
+    usersList: {
       type: Array as PropType<any>,
       default: () => {
         return [];

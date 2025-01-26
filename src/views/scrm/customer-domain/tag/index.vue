@@ -165,7 +165,7 @@
       :hide-cancel="true"
     >
       <edit-tag
-        :employees-list="employeesList.list"
+        :users-list="usersList.list"
         :edit-data="state.recordObj"
         @submit-success="handleEditSuccess"
       ></edit-tag>
@@ -215,7 +215,7 @@
     pageIndex: 1,
     pageSize: 10,
   } as GetTagRequest);
-  const employeesList = reactive<any>({
+  const usersList = reactive<any>({
     list: [],
   });
   const pagination = reactive({

@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: George
  * @Date: 2023-08-23 23:51:30
  * @LastEditors: George
@@ -59,35 +59,31 @@
 </template>
 
 <script lang="ts" setup>
-  import DepartmentSide from '@/views/scrm/wechat/employee/components/department-side.vue';
   import { onMounted, reactive, ref } from 'vue';
-  import {
-    listEmployees,
-    ListEmployeesReply,
-    ListEmployeesRequest,
-  } from '@/api/scrm/employee';
+  import DepartmentSide from '@/views/scrm/wechat/user/components/department-side.vue';
+  import { listUsers, ListUsersReply, ListUsersRequest } from '@/api/scrm/user';
 
   const queryForm = reactive({
     weWorkMainDepartmentId: null,
-  } as ListEmployeesRequest);
+  } as ListUsersRequest);
   const state = reactive({
     tableLoading: false,
-    deleteEmployeeLoading: false,
-    editEmployee: {
+    deleteUserLoading: false,
+    editUser: {
       visible: false,
       loading: false,
-      employeeId: 0,
+      userId: 0,
     },
   });
 
-  const pageData = ref({} as ListEmployeesReply);
+  const pageData = ref({} as ListUsersReply);
 
   const queryChange = () => {
     if (state.tableLoading) {
       return;
     }
     state.tableLoading = true;
-    listEmployees(queryForm)
+    listUsers(queryForm)
       .then((res) => {
         pageData.value = res.data;
       })

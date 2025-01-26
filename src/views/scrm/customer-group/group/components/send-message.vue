@@ -25,7 +25,7 @@
             allow-clear
           >
             <a-option
-              v-for="(item, index) in employeesList.list"
+              v-for="(item, index) in usersList.list"
               :key="index"
               :value="item.weWorkUserId"
               >{{ item.name }}</a-option
@@ -78,17 +78,17 @@
     UploadRequest,
   } from '@arco-design/web-vue';
   import uploadMediaImages from '@/utils/media-resource';
-  import { listEmployees } from '@/api/scrm/employee';
   import {
     wechatMessageTemplate,
     GetWechatGroupArticlesRequest,
     GetMessageTemplateRequest,
   } from '@/api/scrm/customer';
+  import { listUsers } from '@/api/scrm/user';
 
   const emits = defineEmits(['submitSuccess', 'submitFailed', 'update:id']);
 
   const apiUrl = import.meta.env.VITE_API_API_URL;
-  const employeesList = reactive<any>({
+  const usersList = reactive<any>({
     list: [],
   });
   const formRef = ref();
@@ -160,12 +160,12 @@
   const changeCoverImage = async () => {
     return true;
   };
-  async function fetchtEmployees() {
-    const res = await listEmployees({});
+  async function fetchtUsers() {
+    const res = await listUsers({});
     try {
-      employeesList.list = res.data?.list;
+      usersList.list = res.data?.list;
     } catch (err) {
-      employeesList.list = [];
+      usersList.list = [];
     }
   }
   const onSubmit = async () => {
@@ -201,7 +201,7 @@
       });
   };
   onMounted(() => {
-    fetchtEmployees();
+    fetchtUsers();
   });
   // watch(
   //   () => prop.sender,

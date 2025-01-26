@@ -18,7 +18,7 @@
           placeholder="请选择群主..."
         >
           <a-option
-            v-for="(item, index) in employeesList?.list"
+            v-for="(item, index) in usersList?.list"
             :key="index"
             :value="item.weWorkUserId"
             :label="item.name"
@@ -34,7 +34,7 @@
           multiple
         >
           <a-option
-            v-for="(item, index) in employeesList?.list"
+            v-for="(item, index) in usersList?.list"
             :key="index"
             :value="item.weWorkUserId"
             :label="item.name"
@@ -59,9 +59,9 @@
     CreateWechatGroupRequest,
     createWechatGroup,
   } from '@/api/scrm/customer';
-  import { listEmployees } from '@/api/scrm/employee';
+  import { listUsers } from '@/api/scrm/user';
 
-  const employeesList = reactive<any>({
+  const usersList = reactive<any>({
     list: [],
   });
 
@@ -87,12 +87,12 @@
   const state = reactive({
     submitLoading: false,
   });
-  async function fetchtEmployees() {
-    const res = await listEmployees({});
+  async function fetchtUsers() {
+    const res = await listUsers({});
     try {
-      employeesList.list = res.data?.list;
+      usersList.list = res.data?.list;
     } catch (err) {
-      employeesList.list = [];
+      usersList.list = [];
     }
   }
 
@@ -122,6 +122,6 @@
   };
 
   onMounted(() => {
-    fetchtEmployees();
+    fetchtUsers();
   });
 </script>

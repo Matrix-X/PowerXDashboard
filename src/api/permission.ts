@@ -105,31 +105,31 @@ export function listAPI(request: ListAPIRequest) {
   });
 }
 
-export interface GetRoleEmployeesRequest extends Pagination {
+export interface GetRoleUsersRequest extends Pagination {
   roleCode: string;
 }
 
-export interface RoleEmployeeDepartment {
+export interface RoleUserDepartment {
   id: number;
   name: string;
 }
 
-export interface RoleEmployee {
+export interface RoleUser {
   id: number;
   name: string;
   nickname: string;
   account: string;
   phoneNumber: string;
-  department?: RoleEmployeeDepartment;
+  department?: RoleUserDepartment;
   email: string;
 }
 
-export interface GetRoleEmployeesReply extends Pagination {
-  list: RoleEmployee[];
+export interface GetRoleUsersReply extends Pagination {
+  list: RoleUser[];
 }
 
-export function getRoleEmployees(request: GetRoleEmployeesRequest) {
-  return axios.get<GetRoleEmployeesReply>(
+export function getRoleUsers(request: GetRoleUsersRequest) {
+  return axios.get<GetRoleUsersReply>(
     `/api/v1/admin/permission/roles/${request.roleCode}/users`,
     { params: request },
   );
@@ -151,18 +151,18 @@ export function setUserRoles(request: SetUserRolesRequest) {
   );
 }
 
-interface SetRoleEmployeesRequest {
+interface SetRoleUsersRequest {
   roleCode: string;
-  employeeIds: number[];
+  userIds: number[];
 }
 
-interface SetRoleEmployeesReply {
+interface SetRoleUsersReply {
   status: string;
 }
 
-export function setRoleEmployees(request: SetRoleEmployeesRequest) {
-  return axios.post<SetRoleEmployeesReply>(
-    `/api/v1/admin/permission/roles/${request.roleCode}/actions/set-employees`,
+export function setRoleUsers(request: SetRoleUsersRequest) {
+  return axios.post<SetRoleUsersReply>(
+    `/api/v1/admin/permission/roles/${request.roleCode}/actions/set-users`,
     request,
   );
 }

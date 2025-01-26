@@ -20,12 +20,12 @@
 <script lang="ts" setup>
   import { ref, onMounted, reactive, computed } from 'vue';
   import {
-    getRoleEmployees,
-    GetRoleEmployeesRequest,
-    RoleEmployee,
-    setRoleEmployees,
+    getRoleUsers,
+    GetRoleUsersRequest,
+    RoleUser,
+    setRoleUsers,
   } from '@/api/permission';
-  import { EmployeeOption, getEmployeeOptions } from '@/api/common';
+  import { UserOption, getUserOptions } from '@/api/common';
   import { Message } from '@arco-design/web-vue';
   import { MaxPageSize } from '@/api';
 
@@ -39,28 +39,23 @@
 
   const emit = defineEmits(['submitSuccess']);
 
-  const data = ref([] as RoleEmployee[]);
+  const data = ref([] as RoleUser[]);
 
   const option = reactive({
-    employeeList: [] as EmployeeOption[],
+    userList: [] as UserOption[],
   });
 
   const transferData = computed(() =>
-    option.employeeList.map(
-      (employee) =>
+    option.userList.map(
+      (user) =>
         ({
-          value: employee.id.toString(),
-          label:
-            `${employee.name}(${employee.email})` !== ''
-              ? `${employee.name}`
-              : '',
+          value: user.id.toString(),
+          label: `${user.name}(${user.email})` !== '' ? `${user.name}` : '',
         }) as any,
     ),
   );
 
-  const selected = computed(() =>
-    data.value.map((employee) => employee.id.toString()),
-  );
+  const selected = computed(() => data.value.map((user) => user.id.toString()));
 
   const selectValue = ref([] as number[]);
 
@@ -72,15 +67,15 @@
     selectValue.value = values.map((value) => parseInt(value, 10));
   };
 
-  const fetchRoleEmployees = async (roleCode: string) => {
+  const fetchRoleUsers = async (roleCode: string) => {
     state.loading = true;
-    const request: GetRoleEmployeesRequest = {
+    const request: GetRoleUsersRequest = {
       roleCode,
       pageIndex: 1,
       pageSize: MaxPageSize,
     };
 
-    getRoleEmployees(request)
+    getRoleUsers(request)
       .then((res) => {
         data.value = res.data.list;
       })
@@ -91,18 +86,18 @@
 
   // todo pagination
   function fetchOption() {
-    getEmployeeOptions({
+    getUserOptions({
       pageIndex: 1,
       pageSize: MaxPageSize,
     }).then((res) => {
-      option.employeeList = res.data.list;
+      option.userList = res.data.list;
     });
   }
 
   const submit = () => {
-    setRoleEmployees({
+    setRoleUsers({
       roleCode: prop.roleCode,
-      employeeIds: selectValue.value,
+      userIds: selectValue.value,
     }).then(() => {
       Message.success('更新成功');
       emit('submitSuccess');
@@ -111,6 +106,6 @@
 
   onMounted(() => {
     fetchOption();
-    fetchRoleEmployees(prop.roleCode);
+    fetchRoleUsers(prop.roleCode);
   });
 </script>

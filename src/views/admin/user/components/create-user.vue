@@ -66,8 +66,8 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { FieldRule, Message } from '@arco-design/web-vue';
-  import { getEmployeeQueryOptions, getOptions } from '@/api/common';
-  import { createEmployee } from '@/api/employee';
+  import { getUserQueryOptions, getOptions } from '@/api/common';
+  import { createUser } from '@/api/user';
 
   const emit = defineEmits(['submitSuccess', 'submitFailed']);
 
@@ -134,8 +134,8 @@
   const option = ref({} as any);
 
   async function fetchOption() {
-    const employeeQueryOptions = await getEmployeeQueryOptions();
-    option.value = employeeQueryOptions.data;
+    const userQueryOptions = await getUserQueryOptions();
+    option.value = userQueryOptions.data;
     const positionOptions = await getOptions({ type: 'position' });
     option.value.positions = positionOptions.data.options;
   }
@@ -150,7 +150,7 @@
       return;
     }
 
-    createEmployee(formModel.value)
+    createUser(formModel.value)
       .then((res) => {
         Message.success({
           content: '提交成功',

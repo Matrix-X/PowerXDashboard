@@ -1,7 +1,7 @@
 import localeMessageBox from '@/components/message-box/locale/en-US';
 import localeLogin from '@/views/login/locale/en-US';
 
-import localeEmployee from '@/views/admin/employee/locale/en-US';
+import localeUser from '@/views/admin/user/locale/en-US';
 
 import localeSettings from './en-US/settings';
 
@@ -26,8 +26,8 @@ export default {
   'navbar.action.locale': 'Switch to English',
 
   'menu.admin': 'System Management',
-  'menu.admin.employee': 'Employee Management',
-  'menu.admin.employee.detail': 'Employee Details',
+  'menu.admin.user': 'User Management',
+  'menu.admin.user.detail': 'User Details',
   'menu.admin.permission': 'Permission Management',
   'menu.admin.permission.role': 'Role Management',
   'menu.admin.dictionary': 'Data Dictionary',
@@ -77,8 +77,7 @@ export default {
   'menu.scrm.operation.groupSend': 'Customer Group Messaging',
   'menu.scrm.operation.welcomeScript': 'Group Welcome Message',
   'menu.scrm.operation.moment': 'Enterprise WeChat Moments',
-  'menu.scrm.operation.employeeGroupSendHistory':
-    'Employee Group Messaging History',
+  'menu.scrm.operation.userGroupSendHistory': 'User Group Messaging History',
   'menu.scrm.customerDomain': 'Customer Domain Management',
   'menu.scrm.customerDomain.customer': 'Customer Management',
   'menu.scrm.customerDomain.customer.detail': 'Customer Details',
@@ -90,8 +89,8 @@ export default {
   'menu.scrm.customerGroup.tag': 'Customer Group Tags',
   'menu.scrm.wechat': 'Enterprise Management',
   'menu.scrm.wechat.organization': 'Department Management',
-  'menu.scrm.wechat.employees': 'Employees Management',
-  'menu.scrm.wechat.group': 'Employee Group Management',
+  'menu.scrm.wechat.users': 'Users Management',
+  'menu.scrm.wechat.group': 'User Group Management',
   'menu.scrm.app': 'Application Management',
   'menu.scrm.sessionArchive': 'Session Archive',
   'menu.scrm.smartCS': 'Smart Customer Service',
@@ -105,5 +104,5 @@ export default {
   ...localeSettings,
   ...localeMessageBox,
   ...localeLogin,
-  ...localeEmployee,
+  ...localeUser,
 };

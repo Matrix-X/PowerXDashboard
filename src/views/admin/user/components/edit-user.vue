@@ -60,18 +60,14 @@
 <script lang="ts" setup>
   import { computed, onMounted, ref } from 'vue';
   import { FieldRule, Message } from '@arco-design/web-vue';
-  import { getEmployeeQueryOptions, getOptions } from '@/api/common';
-  import {
-    getEmployee,
-    updateEmployee,
-    UpdateEmployeeRequest,
-  } from '@/api/employee';
+  import { getUserQueryOptions, getOptions } from '@/api/common';
+  import { getUser, updateUser, UpdateUserRequest } from '@/api/user';
 
   const prop = defineProps({ id: { type: Number, required: true } });
 
   const emit = defineEmits(['submitSuccess', 'submitFailed', 'update:id']);
 
-  const employeeId = computed({
+  const userId = computed({
     get() {
       return prop.id;
     },
@@ -96,7 +92,7 @@
     positionId: undefined,
     jobTitle: '',
     password: '',
-  } as UpdateEmployeeRequest);
+  } as UpdateUserRequest);
 
   const rules = {
     name: [
@@ -136,14 +132,14 @@
   const option = ref({} as any);
 
   async function fetchOption() {
-    const employeeQueryOptions = await getEmployeeQueryOptions();
-    option.value = employeeQueryOptions.data;
+    const userQueryOptions = await getUserQueryOptions();
+    option.value = userQueryOptions.data;
     const positionOptions = await getOptions({ type: 'position' });
     option.value.positions = positionOptions.data.options;
   }
 
-  function fetchEmployee() {
-    getEmployee({ id: employeeId.value }).then((res) => {
+  function fetchUser() {
+    getUser({ id: userId.value }).then((res) => {
       formModel.value = res.data;
       formModel.value.depId = res.data.department?.depId;
       formModel.value.positionId = res.data.position?.id;
@@ -160,7 +156,7 @@
       return;
     }
 
-    updateEmployee(formModel.value)
+    updateUser(formModel.value)
       .then((res) => {
         Message.success({
           content: '提交成功',
@@ -179,6 +175,6 @@
 
   onMounted(() => {
     fetchOption();
-    fetchEmployee();
+    fetchUser();
   });
 </script>

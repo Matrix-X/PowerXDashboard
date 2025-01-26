@@ -1,16 +1,16 @@
 import axios from 'axios';
 
 /**
- * Employee
+ * User
  * @description 员工管理
  */
 
-export interface EmployeeDepartment {
+export interface UserDepartment {
   depId: number;
   depName: string;
 }
 
-export interface Employee {
+export interface User {
   id: number;
   account: string;
   name: string;
@@ -22,25 +22,23 @@ export interface Employee {
   avatar?: string;
   externalEmail?: string;
   roles: string[];
-  department?: EmployeeDepartment;
+  department?: UserDepartment;
   position: string;
   jobTitle: string;
   isEnabled: boolean;
   createdAt: string;
 }
 
-export interface GetEmployeeRequest {
+export interface GetUserRequest {
   id: string;
 }
 
-export type GetEmployeeReply = Employee;
-export function getEmployee(request: GetEmployeeRequest) {
-  return axios.get<GetEmployeeReply>(
-    `/api/v1/admin/employee/employees/${request.id}`,
-  );
+export type GetUserReply = User;
+export function getUser(request: GetUserRequest) {
+  return axios.get<GetUserReply>(`/api/v1/admin/user/users/${request.id}`);
 }
 
-export interface ListEmployeesRequest {
+export interface ListUsersRequest {
   id?: any;
   name?: string;
   email?: string;
@@ -55,33 +53,33 @@ export interface ListEmployeesRequest {
   likeName?: string;
 }
 
-export interface ListEmployeesReply {
-  list: Employee[];
+export interface ListUsersReply {
+  list: User[];
   pageIndex: number;
   pageSize: number;
   total: number;
   children?: any[];
 }
 
-export function listEmployees(request: ListEmployeesRequest) {
-  return axios.post<ListEmployeesReply>(
-    '/api/v1/admin/scrm/organization/wechat/employee/page',
+export function listUsers(request: ListUsersRequest) {
+  return axios.post<ListUsersReply>(
+    '/api/v1/admin/scrm/organization/wechat/user/page',
     request,
   );
 }
 
-export interface SyncEmployeesRequest {
+export interface SyncUsersRequest {
   source: string;
   target: string;
 }
 
-export interface SyncEmployeesReply {
+export interface SyncUsersReply {
   status: boolean;
 }
 
-export function syncEmployees(request: SyncEmployeesRequest) {
-  return axios.post<SyncEmployeesReply>(
-    '/api/v1/admin/employee/employees/actions/sync',
+export function syncUsers(request: SyncUsersRequest) {
+  return axios.post<SyncUsersReply>(
+    '/api/v1/admin/user/users/actions/sync',
     request,
   );
 }

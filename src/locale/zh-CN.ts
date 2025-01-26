@@ -1,7 +1,7 @@
 import localeMessageBox from '@/components/message-box/locale/zh-CN';
 import localeLogin from '@/views/login/locale/zh-CN';
 
-import localeEmployee from '@/views/admin/employee/locale/zh-CN';
+import localeUser from '@/views/admin/user/locale/zh-CN';
 
 import localeSettings from './zh-CN/settings';
 
@@ -26,8 +26,8 @@ export default {
   'navbar.action.locale': '切换为中文',
 
   'menu.admin': '系统管理',
-  'menu.admin.employee': '员工管理',
-  'menu.admin.employee.detail': '员工详情',
+  'menu.admin.user': '员工管理',
+  'menu.admin.user.detail': '员工详情',
   'menu.admin.permission': '权限管理',
   'menu.admin.permission.role': '角色管理',
   'menu.admin.dictionary': '数据字典',
@@ -77,7 +77,7 @@ export default {
   'menu.scrm.operation.groupSend': '客户群发',
   'menu.scrm.operation.welcomeScript': '入群欢迎语',
   'menu.scrm.operation.moment': '企微朋友圈',
-  'menu.scrm.operation.employeeGroupSendHistory': '员工群发记录',
+  'menu.scrm.operation.userGroupSendHistory': '员工群发记录',
   'menu.scrm.customerDomain': '客域管理',
   'menu.scrm.customerDomain.customer': '客户管理',
   'menu.scrm.customerDomain.customer.detail': '客户详情',
@@ -89,7 +89,7 @@ export default {
   'menu.scrm.customerGroup.tag': '客户群标签',
   'menu.scrm.wechat': '企业管理',
   'menu.scrm.wechat.organization': '部门管理',
-  'menu.scrm.wechat.employees': '员工管理',
+  'menu.scrm.wechat.users': '员工管理',
   'menu.scrm.wechat.group': '员工群管理',
   'menu.scrm.app': '应用管理',
   'menu.scrm.sessionArchive': '会话存档',
@@ -107,5 +107,5 @@ export default {
   ...localeSettings,
   ...localeMessageBox,
   ...localeLogin,
-  ...localeEmployee,
+  ...localeUser,
 };

@@ -31,6 +31,13 @@
 
   const RefStoreTable = ref<any>();
 
+  const state = reactive({
+    createStore: {
+      visible: false,
+      parentNode: {},
+    },
+  });
+
   const openAddStore = () => {
     state.createStore.visible = true;
   };
@@ -45,13 +52,6 @@
     'show-page-size': true,
   });
 
-  const state = reactive({
-    createStore: {
-      visible: false,
-      parentNode: {},
-    },
-  });
-
   const refreshStoreList = () => {
     RefStoreTable.value.fetchStoreList({
       pageIndex: pagination.currentPage,
@@ -60,10 +60,4 @@
   };
 </script>
 
-<script lang="ts">
-  export default {
-    name: '门店',
-  };
-</script>
-
-<style scoped></style>
+<style scoped lang="less"></style>

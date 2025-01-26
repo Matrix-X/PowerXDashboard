@@ -46,9 +46,9 @@
   import { createDepartment, CreateDepartmentRequest } from '@/api/department';
   import {
     DepartmentOption,
-    EmployeeOption,
+    UserOption,
     getDepartmentOptions,
-    getEmployeeOptions,
+    getUserOptions,
   } from '@/api/common';
 
   const prop = defineProps({
@@ -101,12 +101,12 @@
   const state = reactive({ submitLoading: false });
 
   const option = reactive({
-    leaderOptions: [] as Array<EmployeeOption>,
+    leaderOptions: [] as Array<UserOption>,
     parentOptions: [] as Array<DepartmentOption>,
   });
 
   function fetchLeaderOptions(likeName = '') {
-    return getEmployeeOptions({ likeName }).then((res) => {
+    return getUserOptions({ likeName }).then((res) => {
       option.leaderOptions = res.data.list;
     });
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <w-offi-account-menu
+    <w-custom-menu
       :is-remote="true"
       :menu-data="menuDataList"
       @submit-data="submitMenuData"
@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import { WOffiAccountMenu } from '@yaoyaochi/weyui';
+  import { WCustomMenu } from '@yaoyaochi/weyui';
   import {
     getOAMenuTree,
     GetOAMenuTreeReply,

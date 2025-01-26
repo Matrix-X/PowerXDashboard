@@ -29,7 +29,7 @@
                 </a-tooltip>
                 <!--                &lt;!&ndash; 编辑员工按钮 &ndash;&gt;-->
                 <!--                <a-tooltip content="分配员工">-->
-                <!--                  <a-button @click="editEmployeeOnClick(record.roleCode)">-->
+                <!--                  <a-button @click="editUserOnClick(record.roleCode)">-->
                 <!--                    <template #icon>-->
                 <!--                      <icon-user-->
                 <!--                        :style="{ fontSize: '16px', color: 'green' }"-->
@@ -62,13 +62,13 @@
       />
     </a-drawer>
     <a-drawer
-      v-model:visible="state.editEmployee.visible"
+      v-model:visible="state.editUser.visible"
       width="500px"
       :footer="false"
     >
-      <RoleEmployee
-        v-if="state.editEmployee.visible"
-        :role-code="state.editEmployee.roleCode"
+      <RoleUser
+        v-if="state.editUser.visible"
+        :role-code="state.editUser.roleCode"
         @submit-success="fetch"
       />
     </a-drawer>
@@ -79,8 +79,8 @@
   import CreateRole from '@/views/admin/permission/role/components/create-role.vue';
   import EditRole from '@/views/admin/permission/role/components/edit-role.vue';
   import { onMounted, reactive, ref } from 'vue';
-  import RoleEmployee from '@/views/admin/permission/role/components/role-employee.vue';
   import { listRoles, ListRolesReply } from '@/api/permission';
+  import RoleUser from '@/views/admin/permission/role/components/role-user.vue';
 
   const state = reactive({
     createRole: {
@@ -90,7 +90,7 @@
       visible: false,
       roleCode: '',
     },
-    editEmployee: {
+    editUser: {
       visible: false,
       roleCode: '',
     },
@@ -103,13 +103,13 @@
       data.value = res.data;
       state.createRole.visible = false;
       state.editRole.visible = false;
-      state.editEmployee.visible = false;
+      state.editUser.visible = false;
     });
   }
 
-  function editEmployeeOnClick(roleCode: string) {
-    state.editEmployee.visible = true;
-    state.editEmployee.roleCode = roleCode;
+  function editUserOnClick(roleCode: string) {
+    state.editUser.visible = true;
+    state.editUser.roleCode = roleCode;
   }
 
   function editRoleOnClick(roleCode: string) {
