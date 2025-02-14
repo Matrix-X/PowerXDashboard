@@ -30,7 +30,7 @@
     ]
   },
   "dependencies": {
-    "@arco-design/web-vue": "^2.49.3",
+    "@arco-design/web-vue": "^2.56.0",
     "@arco-themes/vue-powerx-design-default": "^0.0.2",
     "@babel/core": "^7.0.0",
     "@fullcalendar/core": "^6.1.6",
